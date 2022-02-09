@@ -9,6 +9,9 @@
     328, 288
 */
 
+const downloadBt = document.getElementById('download');
+const loadingLayer = document.getElementById('loadingLayer');
+
 const resultZipFile = new JSZip();
 
 const regex = [
@@ -29,35 +32,49 @@ document.querySelector('.file-input INPUT').addEventListener('change', (event) =
     } else {
         label.innerText = `${fileList.length} files selected`;
     }
-                              
-    for(const zipFile of fileList) {
-        JSZip.loadAsync(zipFile).then((zip) => {
+
+    loadingLayer.classList.add('on');
+    downloadBt.classList.remove('on');  
+    
+    for(let i=0; i<fileList.length; i+=1) {
+        JSZip.loadAsync(fileList[i]).then((zip) => {
             for(const [k,v] of Object.entries(zip.files)) {
-                const fileName = k.split('/')[1];
+                const name = k.split('/');
+                const folderName = name[0];
+                const fileName = name[1];
+                const id = folderName.split('_')[1].split('-')[0];
+
                 for(const reg of regex) {
                     if(reg.test(fileName)) {
-                        resultZipFile.file(fileName, v._data);
+                        resultZipFile.file(`${id}_${fileName}`, v._data);
                         break;
                     }
                 }
             }
         })
         .then(() => {
-            resultZipFile.generateAsync({type:"Blob"}).then(function (content) {
-                let link = document.createElement('a');
-                link.style.display = 'none';
-                document.body.appendChild(link);
-
-                link.href = URL.createObjectURL(content);
-                link.download = `다운로드.zip`;
-                link.click();
-
-                document.body.removeChild(link);
-                link = null;
-                
-           });
+            if(i === (fileList.length-1)) {
+                loadingLayer.classList.remove('on');
+                downloadBt.classList.add('on');
+            }
         });
     }
 
+    downloadBt.addEventListener('click', (event) => {
+        resultZipFile.generateAsync({type:"Blob"}).then(function (content) {
+            let link = document.createElement('a');
+            link.style.display = 'none';
+            document.body.appendChild(link);
+
+            link.href = URL.createObjectURL(content);
+            link.download = `download.zip`;
+            link.click();
+
+            document.body.removeChild(link);
+            link = null;
+            
+            downloadBt.classList.remove('on');  
+       });
+    })
 
 })

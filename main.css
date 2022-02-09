@@ -3,12 +3,25 @@
   }
   
   body {
-    padding: 42vh 32px;
+    /* padding: 42vh 32px; */
+    margin: 0;
     font-size: 14px;
     background: #eee;
     text-align: center;
+    overflow: hidden;
   }
   
+  .wrapper{
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100vw;
+    height: 100vh;
+  }
+
   .file-input {
     display: inline-block;
     text-align: left;
@@ -17,6 +30,7 @@
     width: 450px;
     position: relative;
     border-radius: 3px;
+    z-index: 100;
   }
   
   .file-input > [type='file'] {
@@ -40,7 +54,7 @@
   }
   
   .file-input:hover > .button {
-    background: dodgerblue;
+    background: #3385ff;
     color: white;
   }
   
@@ -52,4 +66,91 @@
   
   .file-input.-chosen > .label {
     opacity: 1;
+  }
+
+  .on {
+    display: block !important;
+    transform: translateY(0) !important;
+  }
+
+  #download {
+    display: none;
+    align-items: center;
+    background-color: #3385ff;
+    border: 2px solid #3385ff;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    fill: #000;
+    font-family: Inter,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    width: 170px;
+    height: 48px;
+    justify-content: center;
+    line-height: 24px;
+    min-width: 140px;
+    outline: 0;
+    padding: 10px 17px;
+    text-align: center;
+    text-decoration: none;
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    position: relative;
+    border-radius: 3px;
+    transform: translateY(-72px);
+  }
+    
+  #download:focus {
+    color: #171e29;
+  }
+    
+  #download:hover {
+    background-color: #339af0;
+    border-color: #339af0;;
+    fill: #06f;
+  }
+    
+  #download:active {
+    background-color: #3385ff;
+    border-color: #3385ff;
+    fill: #06f;
+  }
+
+  .content {
+    display: flex;
+    gap: 13px;
+  }
+
+  #icon {
+    background-image: url(/img/download.png);
+    width: 20px;
+    height: 20px;
+    background-position: center;
+    background-size: 100%;
+  }
+
+  #loadingLayer {
+    background-color:#FFFFFF80;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #loadingLayer.on {
+    z-index: 999;
+    position:absolute;
+    top:0;
+    left:0;
+  }
+
+  #loadingLayer img {
+    width: 100px;
+    height: 100px;
   }

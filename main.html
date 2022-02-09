@@ -12,12 +12,17 @@
 </head>
 
 <body>
-    <div class='file-input'>
-        <input type='file' multiple>
-        <span class='button'>Choose</span>
-        <span class='label' data-js-label>No file selected</label>
+    <div class="wrapper">
+        <div class='file-input'>
+            <input type='file' multiple>
+            <span class='button'>Choose</span>
+            <span class='label' data-js-label>No file selected</label>
+        </div>
+        <div id="download" class="">
+            <div class="content"><span id="icon"></span>DOWNLOAD</div>
+        </div>
     </div>
-
+    <div id="loadingLayer"><img src="/img/loading.gif" /></div>
     <script src="main.js"></script>
 </body>
 
