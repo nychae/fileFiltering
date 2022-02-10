@@ -126,7 +126,7 @@
   }
 
   #icon {
-    background-image: url(/img/download.png);
+    background-image: url(./img/download.png);
     width: 20px;
     height: 20px;
     background-position: center;
