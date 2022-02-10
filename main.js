@@ -74,6 +74,8 @@ document.querySelector('.file-input INPUT').addEventListener('change', (event) =
             link = null;
             
             downloadBt.classList.remove('on');  
+            document.querySelector('INPUT[type="file"]').value = '';
+            label.innerText = 'No file selected';
        });
     })
 
